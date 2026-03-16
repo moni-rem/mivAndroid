@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_roster"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Roster" />
+    <item
+        android:id="@+id/nav_attend"
+        android:icon="@drawable/outline_assignment_add_24"
+        android:title="Attend" />
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/outline_add_reaction_24"
+        android:title="Add" />
+    <item
+        android:id="@+id/nav_report"
+        android:icon="@drawable/outline_android_cell_4_bar_alert_24"
+        android:title="Report" />
+</menu>

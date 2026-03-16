@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/ivReportAvatar"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_launcher_foreground"
+        android:contentDescription="Student avatar" />
+
+    <TextView
+        android:id="@+id/tvReportStudentName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="12dp"
+        android:text="Student Name"
+        android:textColor="#222222"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- Status Badge -->
+    <TextView
+        android:id="@+id/tvReportStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_away"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="Absent"
+        android:textColor="#F44336"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_student_attendance.xml -->
+<!-- Used as each row in the RecyclerView (rvStudents) -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <!-- Student Avatar -->
+        <ImageView
+            android:id="@+id/ivStudentAvatar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/img"
+            android:contentDescription="Student avatar" />
+
+        <!-- Name & ID -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="12dp">
+
+            <TextView
+                android:id="@+id/tvStudentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="John Doe"
+                android:textColor="#222222"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvStudentId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STU001"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Here Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnHere"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_btn_here"
+
+            android:drawablePadding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Here"
+            android:textColor="#4CAF50"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- Away Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAway"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_btn_away"
+
+            android:drawablePadding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Away"
+            android:textColor="#F44336"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
