@@ -45,8 +45,17 @@ class AttendanceActivity : AppCompatActivity() {
         bottomNav.selectedItemId = R.id.nav_attend
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
+                R.id.nav_roster -> {
+                    startActivity(Intent(this, SummaryActivity::class.java))
+                    true
+                }
+                R.id.nav_attend -> true
+                R.id.nav_add -> {
+                    startActivity(Intent(this, AddStudentActivity::class.java))
+                    true
+                }
                 R.id.nav_report -> { goToReport(); true }
-                else -> true
+                else -> false
             }
         }
     }

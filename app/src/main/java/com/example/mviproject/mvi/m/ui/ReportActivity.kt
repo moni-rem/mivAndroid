@@ -1,6 +1,7 @@
 package com.example.mviproject.mvi.m.ui
 
 import android.os.Bundle
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,12 +52,25 @@ class ReportActivity : AppCompatActivity() {
             finish()
         }
 
+        // ── Bottom nav ──
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_report
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_attend -> { finish(); true }
-                else -> true
+                R.id.nav_roster -> {
+                    startActivity(Intent(this, SummaryActivity::class.java))
+                    true
+                }
+                R.id.nav_attend -> {
+                    startActivity(Intent(this, AttendanceActivity::class.java))
+                    true
+                }
+                R.id.nav_add -> {
+                    startActivity(Intent(this, AddStudentActivity::class.java))
+                    true
+                }
+                R.id.nav_report -> true
+                else -> false
             }
         }
     }

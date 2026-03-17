@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDE8F0">
+    <!-- BOTTOM NAVIGATION — Material style -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/bottom_nav_colors"
+        app:itemTextColor="@color/bottom_nav_colors"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_bottom_nav" />
+
+
+    <!-- Scrollable content above the nav bar -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNav"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add New Student"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#F4799F"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/etStudentName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Student Name"
+                android:textColorHint="#CCAAAA"
+                android:textColor="#2A2A2A"
+                android:textSize="15sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/etStudentId"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Student ID e.g. STU005"
+                android:textColorHint="#CCAAAA"
+                android:textColor="#2A2A2A"
+                android:textSize="15sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:inputType="text"
+                android:layout_marginBottom="32dp" />
+
+            <Button
+                android:id="@+id/btnSaveStudent"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Save Student"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:backgroundTint="#F4799F"
+                android:stateListAnimator="@null"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Back"
+                android:textColor="#F4799F"
+                android:textSize="15sp"
+                android:backgroundTint="#FFFFFF"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

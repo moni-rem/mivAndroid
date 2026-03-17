@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MviProject">
+
+        <!-- HOME SCREEN — launches first -->
         <activity
-            android:name=".mvi.m.ui.AttendanceActivity"
+            android:name=".mvi.m.ui.SummaryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +22,9 @@
             </intent-filter>
         </activity>
 
-        <!-- ADD HERE -->
+        <!-- Other screens -->
+        <activity android:name=".mvi.m.ui.AttendanceActivity" />
+        <activity android:name=".mvi.m.ui.AddStudentActivity" />
         <activity android:name=".mvi.m.ui.ReportActivity" />
 
     </application>

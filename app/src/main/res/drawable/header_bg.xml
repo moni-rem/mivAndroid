@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/header_bg.xml -->
+<!-- Pink gradient for the top header section -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:startColor="#F9A8C9"
+        android:endColor="#F4799F"
+        android:angle="270" />
+</shape>
