@@ -40,6 +40,12 @@ class AttendanceActivity : AppCompatActivity() {
         findViewById<android.widget.Button>(R.id.btnSaveAttendance).setOnClickListener {
             goToReport()
         }
+        findViewById<android.widget.Button>(R.id.btnGoBack).setOnClickListener {
+            val intent = Intent(this, SummaryActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
+        }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_attend
