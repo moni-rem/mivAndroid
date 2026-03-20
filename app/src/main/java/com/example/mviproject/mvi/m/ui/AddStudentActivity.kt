@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mviproject.R
+import com.example.mviproject.mvi.m.Student
+import com.example.mviproject.mvi.m.StudentRepository
 
 class AddStudentActivity : AppCompatActivity() {
 
@@ -27,14 +29,19 @@ class AddStudentActivity : AppCompatActivity() {
             if (name.isEmpty() || id.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields!", Toast.LENGTH_SHORT).show()
             } else {
+                // Create a new student and add it to the repository
+                val newStudent = Student(name, id, true)
+                StudentRepository.addStudent(newStudent)
+                
                 Toast.makeText(this, "Student $name added!", Toast.LENGTH_SHORT).show()
-                finish()
+                finish() // Go back to the previous screen (SummaryActivity)
             }
         }
 
         btnBack.setOnClickListener {
             finish()
         }
+
         // ── Bottom nav ──
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         bottomNav.selectedItemId = R.id.nav_add

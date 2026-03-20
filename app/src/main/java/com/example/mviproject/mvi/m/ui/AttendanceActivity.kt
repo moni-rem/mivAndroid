@@ -6,32 +6,33 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mviproject.R
+import com.example.mviproject.mvi.m.StudentRepository
 import com.example.mviproject.mvi.m.adapter.AttendanceAdapter
-import com.example.mviproject.mvi.m.adapter.Student
+import com.example.mviproject.mvi.m.Student
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AttendanceActivity : AppCompatActivity() {
 
-    private val studentList = mutableListOf(
-        Student(name = "John Doe", id = "STU001", avatar = R.drawable.frog),
-        Student(name = "Jane Smith", id = "STU002", avatar = R.drawable.hamburger),
-        Student(name = "Bob Lee", id = "STU003", avatar = R.drawable.monkey),
-        Student(name = "Alice", id = "STU004", avatar = R.drawable.monkey),
-        Student(name = "Charlie", id = "STU005", avatar = R.drawable.monkey)
-    )
+    private lateinit var studentList: MutableList<Student>
 
     private fun goToReport() {
         val intent = Intent(this, ReportActivity::class.java)
         intent.putStringArrayListExtra("names", ArrayList(studentList.map { it.name }))
-        intent.putStringArrayListExtra("ids", ArrayList(studentList.map { it.id }))
+        intent.putStringArrayListExtra("ids", ArrayList(studentList.map { it.studentId }))
         intent.putExtra("statuses", studentList.map { it.isPresent }.toBooleanArray())
-        intent.putIntegerArrayListExtra("avatars", ArrayList(studentList.map { it.avatar }))
+        
+        val avatars = studentList.map { it.avatar }
+        intent.putIntegerArrayListExtra("avatars", ArrayList(avatars))
+        
         startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Directly use the repository list so changes are reflected globally
+        studentList = StudentRepository.getStudents()
 
         val recyclerView = findViewById<RecyclerView>(R.id.rvStudents)
         recyclerView.layoutManager = LinearLayoutManager(this)

@@ -30,12 +30,23 @@ class StudentAdapter(
         holder.tvName.text = student.name
         holder.tvId.text   = student.studentId
 
-        if (student.isActive) {
-            holder.tvStatus.text = "✓ Active"
-            holder.tvStatus.setTextColor(Color.parseColor("#27913F"))
+        // Display attendance status if it has been recorded, otherwise show general active status
+        if (student.hasTakenAttendance) {
+            if (student.isPresent) {
+                holder.tvStatus.text = "✓ Present"
+                holder.tvStatus.setTextColor(Color.parseColor("#27913F"))
+            } else {
+                holder.tvStatus.text = "✗ Absent"
+                holder.tvStatus.setTextColor(Color.parseColor("#E74C3C"))
+            }
         } else {
-            holder.tvStatus.text = "✗ Inactive"
-            holder.tvStatus.setTextColor(Color.parseColor("#E74C3C"))
+            if (student.isActive) {
+                holder.tvStatus.text = "✓ Active"
+                holder.tvStatus.setTextColor(Color.parseColor("#27913F"))
+            } else {
+                holder.tvStatus.text = "✗ Inactive"
+                holder.tvStatus.setTextColor(Color.parseColor("#E74C3C"))
+            }
         }
     }
 

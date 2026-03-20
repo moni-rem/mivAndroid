@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mviproject.R
-import com.example.mviproject.mvi.m.adapter.Student
+import com.example.mviproject.mvi.m.Student
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ReportActivity : AppCompatActivity() {
@@ -27,9 +27,10 @@ class ReportActivity : AppCompatActivity() {
 
         val studentList = names.mapIndexed { i, name ->
             Student(
-                name,
-                ids.getOrElse(i) { "" },
-                avatars.getOrElse(i) { R.drawable.img },
+                name = name,
+                studentId = ids.getOrElse(i) { "" },
+                isActive = true,
+                avatar = avatars.getOrElse(i) { R.drawable.img },
                 isPresent = statuses.getOrElse(i) { false }
             )
         }
