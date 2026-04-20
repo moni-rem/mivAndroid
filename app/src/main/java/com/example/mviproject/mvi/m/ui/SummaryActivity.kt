@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mviproject.R
 import com.example.mviproject.mvi.m.StudentRepository
 import com.example.mviproject.mvi.m.adapter.StudentAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SummaryActivity : AppCompatActivity() {
 
@@ -55,30 +54,6 @@ class SummaryActivity : AppCompatActivity() {
         }
         btnAdd?.setOnClickListener {
             startActivity(Intent(this, AddStudentActivity::class.java))
-        }
-
-        // ── Bottom nav ──
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav?.selectedItemId = R.id.nav_roster
-
-        bottomNav?.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_roster -> true
-                R.id.nav_attend -> {
-                    startActivity(Intent(this, AttendanceActivity::class.java))
-                    true
-                }
-                R.id.nav_add -> {
-                    startActivity(Intent(this, AddStudentActivity::class.java))
-                    true
-                }
-                R.id.nav_report -> {
-                    // Start ReportActivity via AttendanceActivity's logic or handle empty report
-                    startActivity(Intent(this, ReportActivity::class.java))
-                    true
-                }
-                else -> false
-            }
         }
     }
 

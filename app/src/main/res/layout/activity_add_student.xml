@@ -5,24 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FDE8F0">
-    <!-- BOTTOM NAVIGATION — Material style -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
-        app:itemIconTint="@color/bottom_nav_colors"
-        app:itemTextColor="@color/bottom_nav_colors"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_bottom_nav" />
 
-
-    <!-- Scrollable content above the nav bar -->
+    <!-- Scrollable content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav"
         android:fillViewport="true">
 
         <LinearLayout

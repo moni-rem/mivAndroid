@@ -2,68 +2,76 @@ package com.example.mviproject.mvi.m.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mviproject.R
-import com.example.mviproject.mvi.m.StudentRepository
-import com.example.mviproject.mvi.m.adapter.AttendanceAdapter
 import com.example.mviproject.mvi.m.Student
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.mviproject.mvi.m.adapter.AttendanceAdapter
+import com.example.mviproject.mvi.m.intent.AttendanceIntent
+import com.example.mviproject.mvi.m.state.AttendanceState
+import com.example.mviproject.mvi.m.viewmodel.AttendanceViewModel
+import kotlinx.coroutines.launch
 
 class AttendanceActivity : AppCompatActivity() {
 
-    private lateinit var studentList: MutableList<Student>
-
-    private fun goToReport() {
-        val intent = Intent(this, ReportActivity::class.java)
-        intent.putStringArrayListExtra("names", ArrayList(studentList.map { it.name }))
-        intent.putStringArrayListExtra("ids", ArrayList(studentList.map { it.studentId }))
-        intent.putExtra("statuses", studentList.map { it.isPresent }.toBooleanArray())
-        
-        val avatars = studentList.map { it.avatar }
-        intent.putIntegerArrayListExtra("avatars", ArrayList(avatars))
-        
-        startActivity(intent)
-    }
+    private val viewModel: AttendanceViewModel by viewModels()
+    private lateinit var adapter: AttendanceAdapter
+    private var currentStudents: List<Student> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Directly use the repository list so changes are reflected globally
-        studentList = StudentRepository.getStudents()
-
         val recyclerView = findViewById<RecyclerView>(R.id.rvStudents)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar) // Ensure this exists in activity_main.xml or handle null
+        
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = AttendanceAdapter(studentList)
+        
+        // Observe State
+        lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when (state) {
+                    is AttendanceState.Idle -> {
+                        viewModel.handleIntent(AttendanceIntent.LoadStudents)
+                    }
+                    is AttendanceState.Loading -> {
+                        progressBar?.visibility = View.VISIBLE
+                    }
+                    is AttendanceState.Success -> {
+                        progressBar?.visibility = View.GONE
+                        currentStudents = state.students
+                        adapter = AttendanceAdapter(state.students.toMutableList())
+                        recyclerView.adapter = adapter
+                    }
+                    is AttendanceState.Error -> {
+                        progressBar?.visibility = View.GONE
+                        Toast.makeText(this@AttendanceActivity, state.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
 
         findViewById<android.widget.Button>(R.id.btnSaveAttendance).setOnClickListener {
             goToReport()
         }
+        
         findViewById<android.widget.Button>(R.id.btnGoBack).setOnClickListener {
-            val intent = Intent(this, SummaryActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
             finish()
         }
+    }
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.selectedItemId = R.id.nav_attend
-        bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_roster -> {
-                    startActivity(Intent(this, SummaryActivity::class.java))
-                    true
-                }
-                R.id.nav_attend -> true
-                R.id.nav_add -> {
-                    startActivity(Intent(this, AddStudentActivity::class.java))
-                    true
-                }
-                R.id.nav_report -> { goToReport(); true }
-                else -> false
-            }
-        }
+    private fun goToReport() {
+        val intent = Intent(this, ReportActivity::class.java)
+        intent.putStringArrayListExtra("names", ArrayList(currentStudents.map { it.name }))
+        intent.putStringArrayListExtra("ids", ArrayList(currentStudents.map { it.studentId }))
+        intent.putExtra("statuses", currentStudents.map { it.isPresent }.toBooleanArray())
+        intent.putIntegerArrayListExtra("avatars", ArrayList(currentStudents.map { it.avatar }))
+        startActivity(intent)
     }
 }
